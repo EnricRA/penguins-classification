@@ -3,7 +3,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 class PenguinPreprocessor:
-    """Codifica categorías y escala variables numéricas para los modelos."""
+    #Codifica categorías y escala variables numéricas para los modelos.
 
     def __init__(self) -> None:
         # Vectorizador para convertir diccionarios en matrices numéricas
