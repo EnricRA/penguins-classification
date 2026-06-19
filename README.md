@@ -1,22 +1,21 @@
 # Penguin Species Classification
 
-Classifier project for the Palmer Archipelago penguins dataset using four models:
-logistic regression, SVM, decision trees, and KNN.
+Proyecto de clasificación para el conjunto de datos de pingüinos del Archipiélago Palmer utilizando cuatro modelos: regresión logística, SVM, árboles de decisión y KNN.
 
-## Project structure
+## Estructura del proyecto
 
 ```
 penguins-classification/
 ├── client/
-│   └── client.py              # HTTP client (2+ requests per model)
+│   └── client.py              # HTTP client (2 peticiones por modelo)
 ├── data/
 │   └── penguins_size.csv      # Kaggle dataset
-├── models/                    # Serialized models (generated after training)
+├── models/                    # Serialized models (generados despues de entrenar)
 ├── services/
-│   ├── logistic_regression_app.py  # Flask service on port 5001
-│   ├── svm_app.py                  # Flask service on port 5002
-│   ├── decision_tree_app.py        # Flask service on port 5003
-│   └── knn_app.py                  # Flask service on port 5004
+│   ├── logistic_regression_app.py  # Servicio Flask en el puerto 5001
+│   ├── svm_app.py                  # Servicio Flask en el puerto 5002
+│   ├── decision_tree_app.py        # Servicio Flask en el puerto 5003
+│   └── knn_app.py                  # Servicio Flask en el puerto 5004
 ├── src/
 │   ├── data_loader.py
 │   ├── preprocessing.py
@@ -31,25 +30,25 @@ conda env create -f environment.yml
 conda activate penguins-classification
 ```
 
-## Train models
+## Entrenar los modelos
 
-From the project root:
+En la raiz del proyecto:
 
 ```bash
 python -m src.train_models
 ```
 
-This will:
-- Load `data/penguins_size.csv` and drop rows with missing values
-- Split 80% train / 20% test (stratified)
-- Encode `species` with `LabelEncoder`
-- One-hot encode categorical features with `DictVectorizer`
-- Standard-scale numeric features with `StandardScaler` (fit on train only)
-- Train and serialize all four models into `models/`
+Esto hara:
+- Cargar el dataset `data/penguins_size.csv` y eliminar los registros con valores faltantes.
+- Realizar un Train/Test Split del 80% para entrenamiento y 20% para prueba.
+- Codificar `species` utilizando `LabelEncoder`
+- Aplicar One-Hot Encoding a las variables categóricas mediante `DictVectorizer`
+- Escalar las variables numéricas con `StandardScaler` (ajustado solo para el conjunto de entrenamiento)
+- Entrenar y serializar los cuatro modelos en el directorio `models/`
 
-## Run Flask services
+## Ejecutar los servicios Flask
 
-Open four terminals (with the conda environment active) and run:
+Abre cuatro terminales (con el enviorament de conda) y  ejecuta:
 
 ```bash
 python -m services.logistic_regression_app
@@ -65,15 +64,15 @@ python -m services.knn_app
 | Decision tree         | 5003 |
 | KNN                   | 5004 |
 
-## Run the client
+## Ejecuta el cliente
 
-With all four services running:
+Con los cuatro servicios ya ejecutandose en diferentes terminales:
 
 ```bash
 python client/client.py
 ```
 
-## Example prediction request
+## Ejemplo de solicitud de predicción
 
 ```bash
 curl -X POST http://127.0.0.1:5001/predict ^
@@ -81,9 +80,7 @@ curl -X POST http://127.0.0.1:5001/predict ^
   -d "{\"island\":\"Biscoe\",\"culmen_length_mm\":50.0,\"culmen_depth_mm\":15.0,\"flipper_length_mm\":220,\"body_mass_g\":5400,\"sex\":\"FEMALE\"}"
 ```
 
-## Export conda environment
-
-After installing all packages:
+## Exportar la configuracion en enviorament
 
 ```bash
 conda env export > environment.yml
