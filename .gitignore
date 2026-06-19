@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.joblib
+.ipynb_checkpoints/
+.conda/
+.env
+.vscode/
+*.egg-info/
+dist/
+build/
