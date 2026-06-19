@@ -8,6 +8,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+# URLs de los servicios de predicción desplegados para cada modelo
 SERVICES = {
     "logistic_regression": "http://127.0.0.1:5001/predict",
     "svm": "http://127.0.0.1:5002/predict",

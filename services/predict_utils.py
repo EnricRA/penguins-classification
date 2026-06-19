@@ -25,6 +25,7 @@ def load_artifact(model_name: str) -> dict:
 
 
 def predict_species(artifact: dict, payload: dict) -> dict:
+    # Valida que el payload contenga todos los campos requeridos
     missing_fields = [field for field in REQUIRED_FIELDS if field not in payload]
     if missing_fields:
         raise ValueError(f"Missing required fields: {', '.join(missing_fields)}")
@@ -38,6 +39,7 @@ def predict_species(artifact: dict, payload: dict) -> dict:
         "sex": payload["sex"],
     }
 
+    # Prepara la entrada y genera la predicción
     features = artifact["preprocessor"].transform([record])
     prediction_code = int(artifact["model"].predict(features)[0])
     species = artifact["label_encoder"].inverse_transform([prediction_code])[0]

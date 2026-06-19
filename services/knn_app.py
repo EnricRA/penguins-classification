@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from services.predict_utils import load_artifact, predict_species
 
 app = Flask(__name__)
+# Carga el artefacto del modelo k-NN al iniciar el servicio
 ARTIFACT = load_artifact("knn")
 
 

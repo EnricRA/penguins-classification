@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
+# Columnas usadas como entrada para los modelos
 FEATURE_COLUMNS = [
     "island",
     "culmen_length_mm",
@@ -21,6 +22,7 @@ CATEGORICAL_COLUMNS = ["island", "sex"]
 
 
 def load_penguins_dataset(csv_path: Path | str | None = None) -> pd.DataFrame:
+    # Carga y limpia el conjunto de datos de pingüinos desde CSV
     if csv_path is None:
         csv_path = Path(__file__).resolve().parent.parent / "data" / "penguins_size.csv"
     csv_path = Path(csv_path)
@@ -35,4 +37,5 @@ def load_penguins_dataset(csv_path: Path | str | None = None) -> pd.DataFrame:
 
 
 def records_from_dataframe(df: pd.DataFrame) -> list[dict]:
+    # Convierte el DataFrame en una lista de registros para el preprocesador
     return df[FEATURE_COLUMNS].to_dict(orient="records")

@@ -24,12 +24,15 @@ MODEL_CONFIGS = {
 
 
 def train_and_save_models() -> None:
+    # Carga datos y prepara registros para entrenamiento
     df = load_penguins_dataset()
     feature_records = records_from_dataframe(df)
 
+    # Codifica las etiquetas de especie en valores numéricos
     label_encoder = LabelEncoder()
     labels = label_encoder.fit_transform(df[TARGET_COLUMN])
 
+    # Separa datos en entrenamiento y prueba
     train_records, test_records, y_train, y_test = train_test_split(
         feature_records,
         labels,
@@ -38,6 +41,7 @@ def train_and_save_models() -> None:
         stratify=labels,
     )
 
+    # Ajusta el preprocesador solo con los datos de entrenamiento
     preprocessor = PenguinPreprocessor()
     x_train = preprocessor.fit_transform(train_records)
     x_test = preprocessor.transform(test_records)
